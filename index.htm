@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8">
+  <title>Сүйіктіме сайт</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700&display=swap" rel="stylesheet">
+  <style>
+    html,body {
+      height:100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(120deg, #221950 0%, #2c2250 40%, #614382 80%, #f8cdda 100%);
+      overflow: hidden;
+      min-height: 100vh;
+      transition: background 0.6s;
+    }
+    .bg_heart, .bg_petals {
+      position:fixed;
+      top:0; left:0;
+      width:100vw; height:100vh;
+      pointer-events: none;
+      z-index:0;
+      overflow:hidden;
+    }
+    .heart {
+      position:absolute;
+      top:-50%;
+      width:32px;
+      height:32px;
+      background:#d3005a;
+      transform:rotate(-45deg);
+      opacity: 0.7;
+      animation: love 7s linear forwards;
+    }
+    .heart:before,
+    .heart:after{
+      position:absolute;
+      content:"";
+      width:100%;
+      height:100%;
+      background:inherit;
+      border-radius:100%;
+    }
+    .heart:before{top:-50%; left:0;}
+    .heart:after{top:0; right:-50%;}
+    @keyframes love {
+      0% { top:110%; opacity: 1;}
+      80% { opacity: 0.8;}
+      100% { top:-10%; opacity: 0;}
+    }
+    .petal {
+      position: absolute;
+      width: 22px;
+      height: 18px;
+      background: radial-gradient(circle at 40% 60%, #ffb6c1 80%, #fb7ba2 100%);
+      border-radius: 60% 40% 60% 40% / 50% 60% 40% 60%;
+      opacity: .45;
+      animation: fall 6s linear forwards;
+      transform: rotate(-8deg);
+    }
+    @keyframes fall {
+      0% { top: -10%; opacity: 0.7;}
+      95% { opacity: 0.5;}
+      100% { top: 110%; opacity: 0;}
+    }
+    .big-heart {
+      position: fixed;
+      left: 50%;
+      top: 50%;
+      width: 120px;
+      height: 120px;
+      background: #ff2564;
+      transform: translate(-50%,-50%) scale(1);
+      opacity: 0.95;
+      z-index: 10;
+      border-radius: 40% 40% 60% 60% / 60% 60% 40% 40%;
+      box-shadow: 0 0 40px #ffb6c1a0;
+      pointer-events: none;
+      animation: pop-heart 1.2s cubic-bezier(.4,2,.5,1) forwards;
+    }
+    .big-heart:before,
+    .big-heart:after{
+      position:absolute;
+      content:"";
+      width:100%;
+      height:100%;
+      background:inherit;
+      border-radius:100%;
+    }
+    .big-heart:before{top:-50%; left:0;}
+    .big-heart:after{top:0; right:-50%;}
+    @keyframes pop-heart {
+      0% {transform: translate(-50%,-50%) scale(0.3); opacity: 0;}
+      50% {transform: translate(-50%,-50%) scale(1.15); opacity: 1;}
+      100% {transform: translate(-50%,-50%) scale(0.8); opacity: 0;}
+    }
+    .content {
+      z-index: 1;
+      position: relative;
+      background: rgba(38,28,68,0.75);
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(255,100,150,0.18);
+      padding: 32px 24px 36px 24px;
+      max-width: 400px;
+      text-align: center;
+      margin: 60px auto 0 auto;
+      transition: all 0.3s;
+    }
+    .gif-top {
+      margin-bottom: 22px;
+      max-width: 200px;
+      border-radius: 16px;
+      box-shadow: 0 4px 16px #ffb6c133;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      transition: max-width 0.3s;
+    }
+    .love-text {
+      font-size: 1.4em;
+      font-weight: bold;
+      color: #ff96c2;
+      line-height: 1.6;
+      margin-bottom: 12px;
+      text-shadow: 0 2px 8px #614382, 0 0px 2px #d3005a33;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s, transform 0.7s;
+    }
+    .love-text.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.9s, transform 0.9s;
+    }
+    .from {
+      font-size: 1em;
+      color: #ffd6e0;
+      margin-top: 18px;
+      margin-bottom: 8px;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s, transform 0.7s;
+      text-shadow: 0 2px 8px #614382, 0 0px 2px #d3005a33;
+    }
+    .from.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.9s, transform 0.9s;
+    }
+    @media (max-width: 500px) {
+      .content {
+        padding: 16px 8px 26px 8px;
+        max-width: 95vw;
+        margin-top: 14vw;
+      }
+      .gif-top {
+        max-width: 120px;
+      }
+      .love-text {
+        font-size: 1em;
+      }
+      .from {
+        font-size: 0.9em;
+      }
+    }
+    @media (max-width: 350px) {
+      .content {
+        padding: 8px 2px 20px 2px;
+        max-width: 98vw;
+      }
+      .gif-top {
+        max-width: 80px;
+      }
+      .love-text {
+        font-size: 0.8em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg_heart"></div>
+  <div class="bg_petals"></div>
+  <div class="content">
+    <img class="gif-top" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeHUxdGJ6amFsaDZmemFudXVsaXgybDB0ZDRwOTRzZmVmZnFlMmNzcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/5ubHiAtBlv9lSlhVld/giphy.gif" alt="Love GIF">
+    <div class="love-text" id="love1">
+      Әрбір таңым, әр күнім – сен деп атқан,
+    </div>
+    <div class="love-text" id="love2">
+      Аспандағы айымсың жарқыраған.
+    </div>
+    <div class="love-text" id="love3">
+      Күндей жарықсың сен маған,
+    </div>
+    <div class="love-text" id="love4">
+      Сен барда өмір гүлім боп жайнаған.
+    </div>
+    <div class="from" id="from">
+      ♡ Мен сені жақсы көремін! ♡
+    </div>
+  </div>
+  <script>
+    // Сердечки на фоне
+    function rand(min, max) { return Math.random() * (max - min) + min; }
+    function createHeart() {
+      let heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = rand(0, 100) + 'vw';
+      heart.style.background = 'hsl(' + rand(330, 360) + ', 80%, ' + rand(40, 70) + '%)';
+      heart.style.width = heart.style.height = rand(18, 32) + 'px';
+      heart.style.animationDuration = rand(5, 9) + 's';
+      document.querySelector('.bg_heart').appendChild(heart);
+      setTimeout(() => { heart.remove(); }, 9000);
+    }
+    setInterval(createHeart, 430);
+
+    // Лепестки
+    function createPetal() {
+      let petal = document.createElement('div');
+      petal.className = 'petal';
+      petal.style.left = rand(0, 100) + 'vw';
+      petal.style.width = rand(12, 22) + 'px';
+      petal.style.height = rand(10, 18) + 'px';
+      petal.style.opacity = rand(.3, .45);
+      petal.style.animationDuration = rand(4,7)+"s";
+      document.querySelector('.bg_petals').appendChild(petal);
+      setTimeout(()=>{petal.remove();}, 7500);
+    }
+    setInterval(createPetal, 780);
+
+    // Анимация появления текста
+    window.addEventListener('DOMContentLoaded', ()=>{
+      setTimeout(()=>{document.getElementById('love1').classList.add('visible');}, 500);
+      setTimeout(()=>{document.getElementById('love2').classList.add('visible');}, 1200);
+      setTimeout(()=>{document.getElementById('love3').classList.add('visible');}, 1900);
+      setTimeout(()=>{document.getElementById('love4').classList.add('visible');}, 2600);
+      setTimeout(()=>{document.getElementById('from').classList.add('visible');}, 3300);
+    });
+
+    // Большое сердечко при клике
+    function showBigHeart(x, y) {
+      let big = document.createElement('div');
+      big.className = 'big-heart';
+      big.style.left = x+'px';
+      big.style.top = y+'px';
+      document.body.appendChild(big);
+      setTimeout(()=>{big.remove();}, 1200);
+    }
+    document.addEventListener('click', function(e){
+      showBigHeart(e.clientX, e.clientY);
+    });
+    document.addEventListener('touchstart', function(e){
+      if(e.touches.length>0) showBigHeart(e.touches[0].clientX, e.touches[0].clientY);
+    });
+  </script>
+</body>
+</html>
